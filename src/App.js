@@ -1,24 +1,46 @@
 import SignUp from "./pages/SignUp/SignUp";
-import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider, useAuth } from "./context/AuthContext";
 import NavigationBar from "./components/NavigationBar/NavigationBar";
 
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import LogIn from "./pages/LogIn/LogIn";
 
 function App() {
+  const {currentUser} = useAuth();
+  console.log("value ",currentUser);
+
+  const ProtectedRoute = ({ children }) => {
+    if (!currentUser) return <Navigate to="/login" replace={true} />;
+    return children;
+  };
+
+  const ProtectedSignedInUserRoute = ({ children }) => {
+    if (currentUser) return <Navigate to="/" replace={true} />;
+    return children;
+  };
 
   const router = createBrowserRouter([
     {path: "/", element:<NavigationBar/>,children: [
-      {index: true, element: <HomePage />},
-      {path: "/signup", element: <SignUp/>},
-      {path: "login", element: <LogIn />}
+      {index: true, element: 
+       <ProtectedRoute>
+        <HomePage />
+       </ProtectedRoute>
+      },
+      {path: "/signup", element: 
+      <ProtectedSignedInUserRoute>
+         <SignUp/>
+      </ProtectedSignedInUserRoute>},
+      {path: "login", element: 
+      <ProtectedSignedInUserRoute>
+        <LogIn />
+      </ProtectedSignedInUserRoute>  }
     ]}
   ]);
   return (
     <>
       <AuthProvider>
-        <RouterProvider router={router} />
+          <RouterProvider router={router} />
       </AuthProvider>
     </>
   );
