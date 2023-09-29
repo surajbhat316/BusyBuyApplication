@@ -40,9 +40,16 @@ async function handleLogout(){
                             <NavLink className="nav-link" style={ ({isActive}) => (isActive ? {color: "black", border : "1px solid", borderRadius: "10px"} : null) } to="/login" >Log In</NavLink> 
                         </> }
                         
-                        {(currentUser || localStorage.getItem("email") ) && <Nav.Link>
-                            <Button className='btn-danger' onClick={handleLogout} >Log Out</Button> 
-                        </Nav.Link>}
+                        {(currentUser || localStorage.getItem("email") ) && 
+                            <div style={{display: "flex"}}>
+                                <div style={{marginRight: "1rem"}}>
+                                    <NavLink className="nav-link" style={ ({isActive}) => (isActive ? {color: "black", border : "1px solid", borderRadius: "10px"} : null) } to="/cart" >Cart</NavLink>
+                                </div>
+                                <div>
+                                    <Button className='btn-danger' onClick={handleLogout} >Log Out</Button> 
+                                </div>
+                            </div>
+                        }
                     </Nav>
                 </Navbar.Collapse>
             </Container>

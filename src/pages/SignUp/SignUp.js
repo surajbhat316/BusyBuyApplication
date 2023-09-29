@@ -2,6 +2,8 @@ import React, { useRef, useState } from 'react'
 import { Form, Button, Card, Alert, Container } from 'react-bootstrap';
 import { useAuth } from '../../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
+import { doc, setDoc } from 'firebase/firestore';
+import { db } from '../../firebase';
 
 
 export default function SignUp() {
@@ -9,7 +11,7 @@ export default function SignUp() {
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
 
-  const {signup, logout} = useAuth();
+  const {signup} = useAuth();
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
 
@@ -26,6 +28,17 @@ export default function SignUp() {
       await signup(emailRef.current.value, passwordRef.current.value);
       localStorage.setItem("email", emailRef.current.value);
       // await logout();
+
+
+      //Add Cart to the firestore database
+      try{
+        await setDoc(doc(db, "users", emailRef.current.value), {"cart" : []});
+      }
+      catch(error){
+        console.log(error);
+      }
+      
+
       navigate("/");
     }
     catch{
