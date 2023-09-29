@@ -11,12 +11,21 @@ function App() {
   console.log("value ",currentUser);
 
   const ProtectedRoute = ({ children }) => {
-    if (!currentUser) return <Navigate to="/login" replace={true} />;
-    return children;
+    // if (!currentUser) return <Navigate to="/login" replace={true} />;
+    // return children;
+
+    if(currentUser || localStorage.getItem("email") !== ""){
+      return children;
+    }
+    return <Navigate to="/login" replace={true} />;
   };
 
   const ProtectedSignedInUserRoute = ({ children }) => {
-    if (currentUser) return <Navigate to="/" replace={true} />;
+    // if(!currentUser || localStorage.getItem("email") === ""){
+    //   return <Navigate to="/login" replace={true} />;
+    // }
+    if (currentUser || localStorage.getItem("email") !== "") return <Navigate to="/" replace={true} />;
+    
     return children;
   };
 
@@ -31,7 +40,7 @@ function App() {
       <ProtectedSignedInUserRoute>
          <SignUp/>
       </ProtectedSignedInUserRoute>},
-      {path: "login", element: 
+      {path: "/login", element: 
       <ProtectedSignedInUserRoute>
         <LogIn />
       </ProtectedSignedInUserRoute>  }

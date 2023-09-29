@@ -24,11 +24,13 @@ export default function SignUp() {
       setError("");
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
-      await logout();
-      navigate("/login");
+      localStorage.setItem("email", emailRef.current.value);
+      // await logout();
+      navigate("/");
     }
     catch{
       setError("Failed to Create an Account");
+      localStorage.setItem("email", "");
     }
     setLoading(false);
   }

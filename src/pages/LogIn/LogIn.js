@@ -19,10 +19,12 @@ export default function LogIn() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
+      localStorage.setItem("email", emailRef.current.value);
       navigate("/");
     }
     catch{
       setError("Failed to Log In");
+      localStorage.setItem("email", "");
     }
     setLoading(false);
   }

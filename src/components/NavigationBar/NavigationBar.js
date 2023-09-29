@@ -15,6 +15,7 @@ async function handleLogout(){
     try{
         await logout();
         setCurrentUser(null);
+        localStorage.setItem("email", "");
         navigate("/login");
         
     }
@@ -34,12 +35,12 @@ async function handleLogout(){
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        {!currentUser && <>
+                        {(!currentUser && !localStorage.getItem("email"))  && <>
                             <NavLink className="nav-link" style={ ({isActive}) => (isActive ? {color: "black", border : "1px solid", borderRadius: "10px"} : null) } to="/signup" >Sign Up</NavLink>    
                             <NavLink className="nav-link" style={ ({isActive}) => (isActive ? {color: "black", border : "1px solid", borderRadius: "10px"} : null) } to="/login" >Log In</NavLink> 
                         </> }
                         
-                        {currentUser && <Nav.Link>
+                        {(currentUser || localStorage.getItem("email") ) && <Nav.Link>
                             <Button className='btn-danger' onClick={handleLogout} >Log Out</Button> 
                         </Nav.Link>}
                     </Nav>
