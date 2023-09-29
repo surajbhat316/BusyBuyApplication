@@ -6,6 +6,7 @@ import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom"
 import HomePage from "./pages/HomePage/HomePage";
 import LogIn from "./pages/LogIn/LogIn";
 import CartPage from "./pages/CartPage/CartPage";
+import CartContextProvider from "./context/CartContext";
 
 function App() {
   const {currentUser} = useAuth();
@@ -47,7 +48,9 @@ function App() {
       </ProtectedSignedInUserRoute>  },
       {path: "/cart", element: 
       <ProtectedRoute>
-        <CartPage />
+        <CartContextProvider>
+          <CartPage />
+        </CartContextProvider>
       </ProtectedRoute>    
       }
     ]}
