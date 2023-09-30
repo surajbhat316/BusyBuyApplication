@@ -4,12 +4,13 @@ import { db } from "../../firebase";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { useCartContext } from "../../context/CartContext";
 import { useAuth } from "../../context/AuthContext";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
   
 
   const {currentUser} = useAuth();
-  const {handleAdd, setCart} = useCartContext();
+  const {handleAdd, setCart,cart} = useCartContext();
   const [products, setProducts] = useState([]);
 
 
@@ -45,13 +46,13 @@ export default function HomePage() {
 
 
 
-  // function checkIfItemPresentInCart(prod){
-  //   const index = cart.findIndex((item) => item.id === prod.id);
-  //   if(index === -1){
-  //     return false;
-  //   }
-  //   return true;
-  // }
+  function checkIfItemPresentInCart(prod){
+    const index = cart.findIndex((item) => item.id === prod.id);
+    if(index === -1){
+      return false;
+    }
+    return true;
+  }
 
 
   return (
@@ -63,8 +64,8 @@ export default function HomePage() {
               <div className="itemDescription">{item.name}</div>
               <div style={{fontWeight: "bolder"}}>Rs {item.price}</div>
               <div>
-                {/* {checkIfItemPresentInCart(item)?<Link to="/cart"><button className="btn btn-primary">Go to Cart</button></Link>:<button onClick={() => handleAdd(item)} className="btn btn-primary">Add to Cart</button>} */}
-                <button onClick={() => handleAdd(item)} className="btn btn-primary">Add to Cart</button>
+                {checkIfItemPresentInCart(item)?<Link to="/cart"><button className="btn btn-secondary">Go to Cart</button></Link>:<button onClick={() => handleAdd(item)} className="btn btn-primary">Add to Cart</button>}
+                {/* <button onClick={() => handleAdd(item)} className="btn btn-primary">Add to Cart</button> */}
               </div>
             </div>
           </div>

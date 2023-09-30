@@ -45,6 +45,9 @@ async function handleLogout(){
                                 <div style={{marginRight: "1rem"}}>
                                     <NavLink className="nav-link" style={ ({isActive}) => (isActive ? {color: "black", border : "1px solid", borderRadius: "10px"} : null) } to="/cart" >Cart</NavLink>
                                 </div>
+                                <div style={{marginRight: "1rem"}}>
+                                    <NavLink className="nav-link" style={ ({isActive}) => (isActive ? {color: "black", border : "1px solid", borderRadius: "10px"} : null) } to="/orders" >Orders</NavLink>
+                                </div>
                                 <div>
                                     <Button className='btn-danger' onClick={handleLogout} >Log Out</Button> 
                                 </div>

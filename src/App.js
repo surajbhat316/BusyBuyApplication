@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import LogIn from "./pages/LogIn/LogIn";
 import CartPage from "./pages/CartPage/CartPage";
 import CartContextProvider from "./context/CartContext";
+import OrdersPage from "./pages/OrdersPage/OrdersPage";
 
 function App() {
   const {currentUser} = useAuth();
@@ -52,6 +53,11 @@ function App() {
           <CartPage />
         </CartContextProvider>
       </ProtectedRoute>    
+      },
+      {path: "/orders", element: 
+      <ProtectedRoute>
+        <OrdersPage/>
+      </ProtectedRoute>
       }
     ]}
   ]);

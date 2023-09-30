@@ -8,7 +8,7 @@ import "./CartPage.css";
 export default function CartPage() {
 
     const {currentUser} = useAuth();
-    const [cartItems, setCartItems] = useState([]);
+    let [cartItems, setCartItems] = useState([]);
     const [orderItems, setOrderItems] = useState([]);
     const [total, setTotal] = useState(0);
 
@@ -106,7 +106,8 @@ export default function CartPage() {
     function removeItemFromCart(index){
         let filteredItems = cartItems.filter((item) => item.id !== cartItems[index].id)
         console.log("filtered Items ", filteredItems);
-        setCartItems([...filteredItems]);
+        cartItems = filteredItems;
+        setCartItems([...cartItems])
     }
     async function updateCartForTheCurrentUser(email, cart){
         const currentUserCart = doc(db, "users", email);
@@ -162,13 +163,13 @@ export default function CartPage() {
                         <div>
                             {items.name}
                         </div>
-                        <div>
-                            {items.qty*items.price}
-                        </div>
+                    </div>
+                    <div style={{margin: "auto", fontWeight: "bold"}}>
+                        Total Price: {items.qty*items.price}
                     </div>
                     <div className="btnGroup">
                         <button onClick={() => addMoreItems(items)} className="btn btn-primary">+</button>
-                        {items.qty}
+                        <p>{items.qty}</p>
                         <button onClick={() => removeItems(items)} className="btn btn-primary">-</button>
                     </div>
                 </div>
@@ -184,10 +185,10 @@ export default function CartPage() {
                     {total}
                 </div>
             </div>
-            
-            <div className='btnContainer'>
+            {total !== 0 && <div className='btnContainer'>
                 <button onClick={handleMakePayment} className='btn btn-secondary'>Make Payment</button>
-            </div>
+            </div> }
+            
         </div>
     </div>
   )
