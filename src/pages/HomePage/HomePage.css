@@ -5,6 +5,16 @@
     width: 100%;
     justify-content: center;
     align-items: center;
+    overflow: auto;
+    width: 90%;
+    height: 70vh;
+    margin: auto;
+    box-shadow: 0px 0px 19px lightgrey;
+    border-radius: 1rem;
+}
+
+#itemsContainer::-webkit-scrollbar{
+    display: none;
 }
 
 .item{
@@ -38,4 +48,30 @@
     background-color: skyblue;
     border-radius: 1rem;
     font-size: x-large;
+}
+
+#topContainer{
+    width: 90vw;
+    height: 20vh;
+    margin: auto;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+#topContainer form{
+    display: flex;
+    justify-content: center;
+}
+
+#topContainer form input{
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 1px solid;
+    width: 30%;
+    font-size: 1.2rem;
+    margin: 0 0.5rem;
+}
+
+#topContainer form button{
+    font-size: 1.2rem;
 }
