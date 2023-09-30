@@ -9,6 +9,8 @@ export default function CartPage() {
 
     const {currentUser} = useAuth();
     const [cartItems, setCartItems] = useState([]);
+    const [orderItems, setOrderItems] = useState([]);
+    const [total, setTotal] = useState(0);
 
     useEffect(()=>{
         if(currentUser){
@@ -35,6 +37,34 @@ export default function CartPage() {
         
     },[currentUser]);
 
+    useEffect(() => {
+        console.log("Enters second useEffect");
+        calculateTotalCartAmount(cartItems)
+    },[cartItems]);
+
+    useEffect(()=>{
+        if(currentUser){
+            async function getOrdersData(){
+                let ordersData = [];
+                const docRef = doc(db, "users", currentUser.email);
+                const docSnap = await getDoc(docRef);
+    
+                if (docSnap.exists()) {
+                    console.log("Orders:", docSnap.data().orders);
+                    ordersData = docSnap.data().orders;
+                } else {
+                    // docSnap.data() will be undefined in this case
+                    console.log("No such document!");
+                }
+
+                console.log("oreders data ", ordersData);
+                setOrderItems([...ordersData]);
+    
+            }
+            getOrdersData();
+        }
+        
+    },[currentUser]);
 
     function addMoreItems(prod){
         console.log("Enters Add More Items");
@@ -49,6 +79,7 @@ export default function CartPage() {
         console.log("Cart Items after", cartItems);
         setCartItems([...cartItems]);
         updateCartForTheCurrentUser(currentUser.email, cartItems);
+        
     }
 
 
@@ -83,6 +114,41 @@ export default function CartPage() {
             cart : cart
         });
     }
+
+
+    function calculateTotalCartAmount(cartItems){
+        let totalAmount = 0;
+        cartItems.forEach((item) =>{
+            console.log(item);
+            totalAmount+= parseInt(item.qty) * parseInt(item.price)
+        })
+        setTotal(totalAmount);
+    }
+
+    function handleMakePayment(){
+        if(currentUser){
+            console.log("Enters handleMakePayment");
+            console.log(orderItems);
+            let orderedItems = [...orderItems];
+            orderedItems.unshift(...cartItems);
+            console.log(orderedItems);
+            updateOrdersForTheCurrentUser(currentUser.email, orderedItems);
+        }
+        
+
+        
+    }
+
+
+    async function updateOrdersForTheCurrentUser(email, orderedItems) {
+        const currentUserCart = doc(db, "users", email);
+        await updateDoc(currentUserCart, {
+            orders : orderedItems
+        });
+        setCartItems([]);
+        updateCartForTheCurrentUser(email, []);
+    }
+
   return (
     <div>
         <div className="cartItemsContainer">
@@ -90,7 +156,6 @@ export default function CartPage() {
          <h1>Cart is Empty</h1>:
          
          cartItems.map((items,i) => {
-            console.log(items);
             return (
                 <div className="cartItem" key={i}>
                     <div className="nameAndPrice">
@@ -109,7 +174,21 @@ export default function CartPage() {
                 </div>
             )
          })}
-         </div>
+        </div>
+        <div className='totalsAndPayment'>
+            <div className='amtContainer'>
+                <div>
+                    Total Amount
+                </div>
+                <div>
+                    {total}
+                </div>
+            </div>
+            
+            <div className='btnContainer'>
+                <button onClick={handleMakePayment} className='btn btn-secondary'>Make Payment</button>
+            </div>
+        </div>
     </div>
   )
 }

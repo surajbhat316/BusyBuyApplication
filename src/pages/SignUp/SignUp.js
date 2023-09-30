@@ -32,7 +32,7 @@ export default function SignUp() {
 
       //Add Cart to the firestore database
       try{
-        await setDoc(doc(db, "users", emailRef.current.value), {"cart" : []});
+        await setDoc(doc(db, "users", emailRef.current.value), {"cart" : [], "orders": []});
       }
       catch(error){
         console.log(error);
