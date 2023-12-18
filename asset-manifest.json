@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/BusyBuyApplication/static/css/main.1c3d1be0.css",
-    "main.js": "/BusyBuyApplication/static/js/main.7a9f62a1.js",
+    "main.js": "/BusyBuyApplication/static/js/main.55d12a46.js",
     "index.html": "/BusyBuyApplication/index.html",
     "main.1c3d1be0.css.map": "/BusyBuyApplication/static/css/main.1c3d1be0.css.map",
-    "main.7a9f62a1.js.map": "/BusyBuyApplication/static/js/main.7a9f62a1.js.map"
+    "main.55d12a46.js.map": "/BusyBuyApplication/static/js/main.55d12a46.js.map"
   },
   "entrypoints": [
     "static/css/main.1c3d1be0.css",
-    "static/js/main.7a9f62a1.js"
+    "static/js/main.55d12a46.js"
   ]
 }
