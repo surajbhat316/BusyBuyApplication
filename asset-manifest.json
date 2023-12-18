@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/BusyBuyApplication/static/css/main.1c3d1be0.css",
+    "main.js": "/BusyBuyApplication/static/js/main.072a98f4.js",
+    "index.html": "/BusyBuyApplication/index.html",
+    "main.1c3d1be0.css.map": "/BusyBuyApplication/static/css/main.1c3d1be0.css.map",
+    "main.072a98f4.js.map": "/BusyBuyApplication/static/js/main.072a98f4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1c3d1be0.css",
+    "static/js/main.072a98f4.js"
+  ]
+}
