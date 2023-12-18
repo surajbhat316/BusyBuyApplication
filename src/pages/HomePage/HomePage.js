@@ -25,11 +25,14 @@ export default function HomePage() {
 
         if (docSnap.exists()) {
           console.log("Document data ABCD:", docSnap.data().cart);
+          setCart([...docSnap.data().cart]);
         } else {
           // docSnap.data() will be undefined in this case
           console.log("No such document!");
+          setCart([]);
         }
-        setCart([...docSnap.data().cart]);
+        console.log("object ", docSnap.data() )
+        // setCart([...docSnap.data().cart]);
       }
       getUserCartDetails();
     }
