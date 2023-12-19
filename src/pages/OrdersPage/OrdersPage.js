@@ -33,7 +33,7 @@ export default function OrdersPage() {
         <div id="ordersContainer">
             {orderedItems.map((item, i) => {
                 return (
-                    <div className="orderItem">
+                    <div className="orderItem" key={i}>
                         <div className="orderItemName">
                             <p>{item.name}</p>
                         </div>

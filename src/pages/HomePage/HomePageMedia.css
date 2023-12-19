@@ -1,0 +1,8 @@
+@media screen and (max-width: 768px) {
+    #topContainer{
+        margin: 1.5rem;
+    }
+    #topContainer form input{
+        width: 50vw;;
+    }
+}

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./HomePage.css";
+import "./HomePageMedia.css"
 import { db } from "../../firebase";
 import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { useCartContext } from "../../context/CartContext";
