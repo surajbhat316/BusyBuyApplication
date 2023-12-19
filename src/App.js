@@ -9,7 +9,19 @@ import CartPage from "./pages/CartPage/CartPage";
 import CartContextProvider from "./context/CartContext";
 import OrdersPage from "./pages/OrdersPage/OrdersPage";
 
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from "react";
+// minified version is also included
+// import 'react-toastify/dist/ReactToastify.min.css';
+
 function App() {
+  
+  useEffect(()=>{
+    toast("Welcome to Buy Busy !")
+  },[])
+
   const {currentUser} = useAuth();
   console.log("value ",currentUser);
 
@@ -66,6 +78,7 @@ function App() {
     <>
       <AuthProvider>
           <RouterProvider router={router} />
+          <ToastContainer />
       </AuthProvider>
     </>
   );

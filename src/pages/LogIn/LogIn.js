@@ -3,6 +3,10 @@ import { Form, Button, Card, Alert, Container } from 'react-bootstrap';
 import { useAuth } from '../../context/AuthContext';
 import { Link , useNavigate } from 'react-router-dom';
 
+import { toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
+
 export default function LogIn() {
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -20,6 +24,7 @@ export default function LogIn() {
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
       localStorage.setItem("email", emailRef.current.value);
+      toast("Logged in Successfully ! ")
       navigate("/");
     }
     catch{

@@ -4,6 +4,12 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import "./CartPage.css";
 
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
+// minified version is also included
+// import 'react-toastify/dist/ReactToastify.min.css';
+
 
 export default function CartPage() {
 
@@ -134,6 +140,7 @@ export default function CartPage() {
             orderedItems.unshift(...cartItems);
             console.log(orderedItems);
             updateOrdersForTheCurrentUser(currentUser.email, orderedItems);
+            toast("Order Placed");
         }
         
 
@@ -152,6 +159,7 @@ export default function CartPage() {
 
   return (
     <div>
+        <ToastContainer />
         <div className="cartItemsContainer">
         {cartItems.length === 0?
          <h1>Cart is Empty</h1>:

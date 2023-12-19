@@ -20,7 +20,7 @@ export default function CartContextProvider({ children }) {
         console.log("CART ", cart);
         const index = cart.findIndex((item) => parseInt(item.id) === parseInt(prod.id));
         if(index === -1){
-            console.log("EEnter -1");
+            console.log("Enter -1");
             const cartItems = cart;
             cartItems.push({...prod, qty: 1});
             // setCart([...cart, {...prod, qty: 1}]);

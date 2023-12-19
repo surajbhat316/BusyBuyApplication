@@ -7,6 +7,12 @@ import { useCartContext } from "../../context/CartContext";
 import { useAuth } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
 
+import { ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
+// minified version is also included
+// import 'react-toastify/dist/ReactToastify.min.css';
+
 export default function HomePage() {
   
 
@@ -75,6 +81,7 @@ export default function HomePage() {
   }
   return (
     <div>
+      <ToastContainer />
       <div id="topContainer">
         <form onSubmit={handleFormSubmit}>
             <input ref={productName} type="text" placeholder="Enter Product Name... pants, Shoes etc" required />

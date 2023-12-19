@@ -3,6 +3,12 @@ import "./NavigationBar.css"
 import { Button, Container, Nav, Navbar } from 'react-bootstrap'
 import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext';
+import { toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
+// minified version is also included
+// import 'react-toastify/dist/ReactToastify.min.css';
+
 
 export default function NavigationBar() {
 
@@ -17,6 +23,7 @@ async function handleLogout(){
         setCurrentUser(null);
         localStorage.setItem("email", "");
         navigate("/login");
+        toast("Logged Out Successfully !");
         
     }
     catch{
